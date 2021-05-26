@@ -1,0 +1,26 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "build all (aud Gen)",
+            "type": "shell",
+            "command": "g++",
+            "args": [
+                "-c","*.cpp","include/*.cpp","-I","include"
+            ],
+            "problemMatcher": []
+        },
+        {
+            "label": "build runnable (aud Gen)",
+            "type": "shell",
+            "command": "g++",
+            "args": [
+                "-g","*.o","-o","audGen","-lsfml-audio","-lsfml-graphics","-lsfml-window","-lsfml-system", "-lopengl32"
+            ],
+            "problemMatcher": [],
+            "dependsOn": [
+                "build main"
+            ]
+        }
+    ]
+}
