@@ -2,7 +2,7 @@
     "version": "2.0.0",
     "tasks": [
         {
-            "label": "build all (aud Gen)",
+            "label": "build all",
             "type": "shell",
             "command": "g++",
             "args": [
@@ -11,11 +11,11 @@
             "problemMatcher": []
         },
         {
-            "label": "build runnable (aud Gen)",
+            "label": "build Reader",
             "type": "shell",
             "command": "g++",
             "args": [
-                "-g","*.o","-o","audGen","-lsfml-audio","-lsfml-graphics","-lsfml-window","-lsfml-system", "-lopengl32"
+                "-g","*.o","-o","Note-Reader","-lsfml-audio","-lsfml-graphics","-lsfml-window","-lsfml-system", "-lopengl32"
             ],
             "problemMatcher": [],
             "dependsOn": [
