@@ -1,5 +1,5 @@
-#ifndef READER_H
-#define READER_H
+#ifndef SCORE_H
+#define SCORE_H
 
 # include <SFML/Graphics.hpp>
 # include <SFML/Audio.hpp>
@@ -14,31 +14,32 @@
 # include <fstream>
 # include <sstream>
 
+# include "Note.h"
 
-class Reader
+class Score
 {
     private:
-        std::vector<double> notes;
-        std::vector<int> times;
+        std::vector<std::shared_ptr<Note>> notes;
+        int pace;
 
         void initVariables(std::string name);
 
         void computeRailsback(int n);
 
     public:
-        Reader(std::string name);
+        Score(std::string name);
         
         //Copy Constructors
-        Reader(const Reader& a);
-        Reader &operator= (const Reader& a);
+        Score(const Score& a);
+        Score &operator= (const Score& a);
         
-        virtual ~Reader();
+        virtual ~Score();
 
         void update();
         void play();
 
-        sf::SoundBuffer getBuffer();
-        sf::Sound getSound();
+        std::vector<std::shared_ptr<Note>> getNotes();
+        int getPace();
 };
 
 #endif

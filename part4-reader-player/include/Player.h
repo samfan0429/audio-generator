@@ -11,6 +11,7 @@
 # include <iostream>
 
 # include "Generator.h"
+# include "Note.h"
 
 class Player
 {
@@ -19,12 +20,12 @@ class Player
         int playing;
         sf::Sound ongoing;
 
-        void initVariables(std::vector<double> notes, std::vector<double> times, std::vector<int> dots, double rate);
+        void initVariables(std::vector<std::shared_ptr<Note>> notes, int pace);
 
         void computeRailsback(int n);
 
     public:
-        Player(std::vector<double> notes, std::vector<double> times, std::vector<int> dots, double rate);
+        Player(std::vector<std::shared_ptr<Note>> notes, int pace);
         
         //Copy Constructors
         Player(const Player& a);

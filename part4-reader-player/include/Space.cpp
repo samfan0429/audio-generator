@@ -4,10 +4,11 @@
 // Private functions
 void Space::initvariables()
 {
-    std::vector<double> tmp = {440.000, 349.228, 261.626, 293.665, 349.228,349.228};
-    std::vector<double> tmp2 = {4,8,16,16,8,8};
-    std::vector<int> tmp3 = {0,1,0,0,0,1};
-    this->play = std::make_shared<Player>(tmp, tmp2, tmp3, 60.0/132.0);
+    this->score = std::make_shared<Score>("Sample");
+    // std::vector<double> tmp = {440.000, 349.228, 261.626, 293.665, 349.228,349.228};
+    // std::vector<double> tmp2 = {4,8,16,16,8,8};
+    // std::vector<int> tmp3 = {0,1,0,0,0,1};
+    // this->play = std::make_shared<Player>(tmp, tmp2, tmp3, 60.0/132.0);
 
     this->window = nullptr;
 }
@@ -55,10 +56,10 @@ void Space::pollEvents()
                 {
                     this->window->close();
                 }
-                else if(this->ev.key.code == sf::Keyboard::Num1)
-                {
-                    this->play->playSound();
-                }
+                // else if(this->ev.key.code == sf::Keyboard::Num1)
+                // {
+                //     this->play->playSound();
+                // }
                 break;
         }
     }
