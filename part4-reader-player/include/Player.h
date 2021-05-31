@@ -20,12 +20,12 @@ class Player
         int playing;
         sf::Sound ongoing;
 
-        void initVariables(std::vector<std::shared_ptr<Note>> notes, int pace);
+        void initVariables(std::vector<std::shared_ptr<Note>> notes);
 
         void computeRailsback(int n);
 
     public:
-        Player(std::vector<std::shared_ptr<Note>> notes, int pace);
+        Player(std::vector<std::shared_ptr<Note>> notes);
         
         //Copy Constructors
         Player(const Player& a);

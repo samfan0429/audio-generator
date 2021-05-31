@@ -19,14 +19,14 @@ class Note
 {
     private:
         double pitch;
-        int dots, time;
+        int dots, time, pace;
 
-        void initVariables(int n, int time, int dots);
+        void initVariables(int n, int time, int dots, int pace);
 
         void computeRailsback(int n);
 
     public:
-        Note(int n, int time, int dots);
+        Note(int n, int time, int dots, int pace);
         
         //Copy Constructors
         Note(const Note& a);
@@ -39,6 +39,7 @@ class Note
         double getPitch();
         int getTime();
         int getDots();
+        int getPace();
 };
 
 #endif

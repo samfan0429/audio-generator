@@ -13,7 +13,7 @@
 # include <SFML/Window.hpp>
 
 
-# include <Score.h>
+# include "Box.h"
 
 // Main Application
 class Space
@@ -23,7 +23,7 @@ private:
     sf::VideoMode videomode;
     sf::Event ev;
 
-    std::shared_ptr<Score> score;
+    std::shared_ptr<Box> player;
     
     void initvariables();
     void initWindow();

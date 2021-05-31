@@ -1,9 +1,9 @@
 # include "Player.h"
 
 // Constructor && destructor
-Player::Player(std::vector<double> notes, std::vector<double> times, std::vector<int> dots, double rate)
+Player::Player(std::vector<std::shared_ptr<Note>> notes)
 {
-    this->initVariables(notes, times, dots, rate);
+    this->initVariables(notes);
 }
 
 Player::~Player()
@@ -24,17 +24,25 @@ Player& Player::operator=(const Player& a)
 }
 
 // Private setups
-void Player::initVariables(std::vector<double> notes, std::vector<double> times, std::vector<int> dots, double rate)
+void Player::initVariables(std::vector<std::shared_ptr<Note>> notes)
 {
     int l = notes.size();
     for(int i=0; i< l ; i++)
     {
-        makers.push_back(std::make_shared<Generator>(notes[i], 0.9, "Sine",times[i], dots[i],rate));
-        if(!makers.empty()) // Debug
+        if(notes[i]->getPitch()<0)
         {
-            std::cout << "Working!!! at " << notes[i] << " w/ time " <<  times[i] << " with extra notes of " <<
-            dots[i] << "th" << std::endl;
+            makers.push_back(std::make_shared<Generator>(notes[i]->getPitch(), 0, "Sine", notes[i]->getTime(), notes[i]->getDots(), notes[i]->getPace()));
         }
+        else
+        {
+            makers.push_back(std::make_shared<Generator>(notes[i]->getPitch(), 0.9, "Sine", notes[i]->getTime(), notes[i]->getDots(), notes[i]->getPace()));
+        }
+        
+        // if(!makers.empty()) // Debug
+        // {
+        //     std::cout << "Working!!! at " << notes[i]->getPitch() << " w/ time " << notes[i]->getTime()<< " with extra notes of " << notes[i]->getDots() << "th" 
+        //     << " at pace of " << notes[i]-> getPace() << std::endl;
+        // }
     }
     playing = -1;
 }

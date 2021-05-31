@@ -32,25 +32,21 @@ void Score::initVariables(std::string name)
     // std::cout << "Working so far" << std::endl;
     // int a = 0;
 
-    getline(file, tmp);
-    this->pace = stoi(tmp);
-    std::cout << pace << std::endl;
-
     while(std::getline(file, tmp))
     {
         // std::cout << tmp[0] << std::endl;
         std::istringstream iss(tmp);
-        std::string n, duration, dots;
+        std::string n, duration, dots, pace;
         std::getline(iss, n, '\t');
         std::getline(iss, duration, '\t');
         std::getline(iss, dots, '\t');
+        std::getline(iss, pace, '\t');
 
-        // int no = stoi(n);
-        // int dur = stoi(duration);
-        // int d = stoi(dots);
+        // int no = stoi(n), dur = stoi(duration), d = stoi(dots), p = stoi(pace);
+
         // std::cout << no << " with duration of " << dur <<  " and " << d << " dots"<< std::endl;
 
-        this->notes.push_back(std::make_shared<Note>(stoi(n), stoi(duration), stoi(dots)));
+        this->notes.push_back(std::make_shared<Note>(stoi(n), stoi(duration), stoi(dots), stoi(pace)));
     }
 
     // for(int i=0; i<notes.size();i++)
@@ -69,9 +65,4 @@ void Score::update()
 std::vector<std::shared_ptr<Note>> Score::getNotes()
 {
     return this->notes;
-}
-
-int Score::getPace()
-{
-    return this->pace;
 }

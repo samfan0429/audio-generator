@@ -1,9 +1,9 @@
 # include "Note.h"
 
 // Constructor && destructor
-Note::Note(int n, int time, int dots)
+Note::Note(int n, int time, int dots, int pace)
 {
-    this->initVariables(n, time, dots);
+    this->initVariables(n, time, dots, pace);
 }
 
 Note::~Note()
@@ -24,12 +24,13 @@ Note& Note::operator=(const Note& a)
 }
 
 // Private setups
-void Note::initVariables(int n, int time, int dots)
+void Note::initVariables(int n, int time, int dots, int pace)
 {
     computeRailsback(n);
+    this->pace = pace;
     this->time = time;
     this->dots = dots;
-    std::cout << this->pitch << " with duration of " << this->time <<  " and " << this->dots << " dots"<< std::endl;
+    // std::cout << this->pitch << " with duration of " << this->time <<  " and " << this->dots << " dots"<< " pace of "<< this->pace << std::endl;
 }
 
 void Note::computeRailsback(int n)
@@ -63,4 +64,9 @@ int Note::getTime()
 int Note::getDots()
 {
     return this->dots;
+}
+
+int Note::getPace()
+{
+    return this->pace;
 }

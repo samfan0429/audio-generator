@@ -1,5 +1,5 @@
-#ifndef SCORE_H
-#define SCORE_H
+#ifndef BOX_H
+#define BOX_H
 
 # include <SFML/Graphics.hpp>
 # include <SFML/Audio.hpp>
@@ -15,27 +15,31 @@
 # include <sstream>
 
 # include "Note.h"
+# include "Score.h"
+# include "Player.h"
 
-class Score
+class Box
 {
     private:
-        std::vector<std::shared_ptr<Note>> notes;
+        std::shared_ptr<Player> player;
+        std::shared_ptr<Score> score;
 
         void initVariables(std::string name);
 
     public:
-        Score(std::string name);
+        Box(std::string name);
         
         //Copy Constructors
-        Score(const Score& a);
-        Score &operator= (const Score& a);
+        Box(const Box& a);
+        Box &operator= (const Box& a);
         
-        virtual ~Score();
+        virtual ~Box();
 
         void update();
         void play();
 
-        std::vector<std::shared_ptr<Note>> getNotes();
+        std::shared_ptr<Player> getPlayer();
+        std::shared_ptr<Score> getScore();
 };
 
 #endif

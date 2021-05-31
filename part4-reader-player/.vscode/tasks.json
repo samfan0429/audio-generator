@@ -15,7 +15,7 @@
             "type": "shell",
             "command": "g++",
             "args": [
-                "-g","*.o","-o","Player","-lsfml-audio","-lsfml-graphics","-lsfml-window","-lsfml-system", "-lopengl32"
+                "-g","*.o","-o","Box","-lsfml-audio","-lsfml-graphics","-lsfml-window","-lsfml-system", "-lopengl32"
             ],
             "problemMatcher": [],
             "dependsOn": [

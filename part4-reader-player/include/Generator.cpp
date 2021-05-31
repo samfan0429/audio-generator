@@ -29,10 +29,10 @@ Generator& Generator::operator=(const Generator& a)
 void Generator::initVariables(double freq, double amp, std::string type, double time, int dots, double rate)
 {
     // std::cout << "It fucking works wtf" << std::endl;
-    double t = 44100.0*4.0/time*rate;
+    double t = 44100.0*4.0/time*60.0/rate;
     if(dots > 0)
     {
-        t+= 44100.0*4.0/(time*pow(2,dots))*rate;
+        t+= 44100.0*4.0/(time*pow(2,dots))*60/rate;
     }
     int duration = (int)t;
     // std::cout << "It fucking works wtf" << std::endl;
@@ -59,11 +59,18 @@ void Generator::initVariables(double freq, double amp, std::string type, double 
 void Generator::makeSineWave(int time, double freq, double amp)
 {
     short result;
-    double tpc = 44100 / freq; // ticks per cycle
-    double cycles = time / tpc;
-    double rad = TWOPI * cycles;
-    short amplitude = 32767 * amp;
-    result = amplitude * sin(rad);
+    if(freq>0)
+    {
+        double tpc = 44100 / freq; // ticks per cycle
+        double cycles = time / tpc;
+        double rad = TWOPI * cycles;
+        short amplitude = 32767 * amp;
+        result = amplitude * sin(rad);
+    } else
+    {
+        result = 0;
+    }
+    
     // if(time%1000 == 0)
     // {
     //     std::cout << "It is adding " << time << std::endl;
