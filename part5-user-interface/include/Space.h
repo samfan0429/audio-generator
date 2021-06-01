@@ -23,7 +23,13 @@ private:
     sf::VideoMode videomode;
     sf::Event ev;
 
-   
+    std::shared_ptr<Key> c;
+    std::shared_ptr<Key> d;
+    std::shared_ptr<Key> e;
+    std::shared_ptr<Key> f;
+    std::shared_ptr<Key> g;
+    std::shared_ptr<Key> a;
+    std::shared_ptr<Key> b;
     
     void initvariables();
     void initWindow();

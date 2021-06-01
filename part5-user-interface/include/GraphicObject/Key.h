@@ -14,19 +14,21 @@
 
 
 // Main Application
-class Key: public sf::ConvexShape
+class Key: public sf::RectangleShape
 {
 private:
     int n;
     
-    void initvariables();
+    void initvariables(int n);
     
 public:
-    Key();
+    Key(int n);
 
     virtual ~Key();
 
     void update();
+
+    int getN();
 };
  
 #endif

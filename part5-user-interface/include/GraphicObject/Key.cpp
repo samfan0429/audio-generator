@@ -2,17 +2,18 @@
 # include <iostream>
 
 // Private functions
-void Key::initvariables()
+void Key::initvariables(int n)
 {
-    
+    this->setSize(sf::Vector2f(27.6,150));
+    this->n = n;
 }
 
 // Public
 
 // Constructor & Destructor
-Key::Key()
-{
-    this->initvariables();
+Key::Key(int n)
+{   
+    this->initvariables(n);
 }
 
 Key::~Key()
@@ -22,5 +23,10 @@ Key::~Key()
 
 void Key::update()
 {
-    
+
+}
+
+int Key::getN()
+{
+    return this->n;
 }
