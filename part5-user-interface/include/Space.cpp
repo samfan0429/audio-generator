@@ -4,68 +4,15 @@
 // Private functions
 void Space::initvariables()
 {
-    int count = 4;
-    float currX = 360 ,currY = 540;
-    c = std::make_shared<Key>(count);
-    c->setFillColor(sf::Color::White);
-    c->setOutlineThickness(2);
-    c->setOutlineColor(sf::Color::Black);
-    c->setPosition(sf::Vector2f(currX,currY));
-    currX+=24.6;
-    // std::cout << "C is " << c->getN() << std::endl;
-    count+=2;
-    // std::cout << "Current count is " << count << std::endl;
-    d = std::make_shared<Key>(count);
-    d->setFillColor(sf::Color::White);
-    d->setOutlineThickness(2);
-    d->setOutlineColor(sf::Color::Black);
-    d->setPosition(sf::Vector2f(currX,currY));
-    currX+=24.6;
-    count+=2;
-    // std::cout << "D is " << d->getN() << std::endl;
+    this->keys = std::make_shared<Keyboard>();
     
-    e = std::make_shared<Key>(count++);
-    e->setFillColor(sf::Color::White);
-    e->setOutlineThickness(2);
-    e->setOutlineColor(sf::Color::Black);
-    e->setPosition(sf::Vector2f(currX,currY));
-    currX+=24.6;
-    // std::cout << "E is " << e->getN() << std::endl;
+    // this->t.setSize(sf::Vector2f(500, 600));
+    // this->t.setFillColor(sf::Color::Red);
+    // this->t.setOutlineThickness(7);
+    // this->t.setOutlineColor(sf::Color::Black);
+    // this->t.setPosition(sf::Vector2f(500, 600));
     
-    f = std::make_shared<Key>(count);
-    f->setFillColor(sf::Color::White);
-    f->setOutlineThickness(2);
-    f->setOutlineColor(sf::Color::Black);
-    f->setPosition(sf::Vector2f(currX,currY));
-    currX+=24.6;
-    count+=2;
-    // std::cout << "F is " << f->getN() << std::endl;
-    
-    g = std::make_shared<Key>(count);
-    g->setFillColor(sf::Color::White);
-    g->setOutlineThickness(2);
-    g->setOutlineColor(sf::Color::Black);
-    g->setPosition(sf::Vector2f(currX,currY));
-    currX+=24.6;
-    count+=2;
-    // std::cout << "G is " << g->getN() << std::endl;
-    
-    a = std::make_shared<Key>(count);
-    a->setFillColor(sf::Color::White);
-    a->setOutlineThickness(2);
-    a->setOutlineColor(sf::Color::Black);
-    a->setPosition(sf::Vector2f(currX,currY));
-    currX+=24.6;
-    count+=2;
-    // std::cout << "A is " << a->getN() << std::endl;
-    
-    b = std::make_shared<Key>(count++);
-    b->setFillColor(sf::Color::White);
-    b->setOutlineThickness(2);
-    b->setOutlineColor(sf::Color::Black);
-    b->setPosition(sf::Vector2f(currX,currY));
-    currX+=24.6;
-    // std::cout << "B is " << b->getN() << std::endl;
+    // this->keys->draw();
     this->window = nullptr;
 }
 
@@ -75,6 +22,7 @@ void Space::initWindow()
     this->videomode.width = 1440;
     this->window = new sf::RenderWindow(this->videomode, "Audio-Generator",sf::Style::Titlebar | sf::Style::Close);
     this->window->setFramerateLimit(30);
+    this->keys->setCanvas(this->window);
     // this->window->setVerticalSyncEnabled(true);
 }
 
@@ -113,12 +61,24 @@ void Space::pollEvents()
                     this->window->close();
                 }
                 break;
+            case sf::Event::MouseButtonPressed:
+                if(this->ev.mouseButton.button == sf::Mouse::Left)
+                {
+                    // std::cout << "Mouse Clicked BB" << std::endl;
+                    sf::Vector2i mouse_pos = sf::Mouse::getPosition(*(this->window));
+                    sf::Vector2f translated_pos = this->window->mapPixelToCoords(mouse_pos);
+                    this->keys->updatePressed(translated_pos);
+                    // std::cout << mouse_pos.x << "   " << mouse_pos.y << std::endl;
+
+                }
+                break;
         }
     }
 }
 
 void Space::update()
 {
+    // std::cout << "Working" << std::endl;
     this->pollEvents();
 }
 
@@ -132,13 +92,27 @@ void Space::render()
     */
     this->window->clear(sf::Color(255,255,255,255));
 
-    this->window->draw(*c);
-    this->window->draw(*d);
-    this->window->draw(*e);
-    this->window->draw(*f);
-    this->window->draw(*g);
-    this->window->draw(*a);
-    this->window->draw(*b);
+    // for(auto &p: this->keys->getKeys())
+    // {
+    //     window
+    // }
+    // std::vector<std::shared_ptr<Key>> keys = this->keys->getKeys();
+
+    // for(auto p:keys)
+    // {
+    //     this->window->draw(*p);
+    // }
+
+    // this->window->draw(this->t);
+    this->keys->draw();
+
+    // this->window->draw(*c);
+    // this->window->draw(*d);
+    // this->window->draw(*e);
+    // this->window->draw(*f);
+    // this->window->draw(*g);
+    // this->window->draw(*a);
+    // this->window->draw(*b);
 
     this->window->display();
 }

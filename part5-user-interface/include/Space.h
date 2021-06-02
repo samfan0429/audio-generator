@@ -12,8 +12,8 @@
 # include <SFML/System.hpp>
 # include <SFML/Window.hpp>
 
-# include "GraphicObject/Key.h"
-
+// # include "GraphicObject/Key.h"
+# include "Keyboard.h"
 
 // Main Application
 class Space
@@ -23,13 +23,16 @@ private:
     sf::VideoMode videomode;
     sf::Event ev;
 
-    std::shared_ptr<Key> c;
-    std::shared_ptr<Key> d;
-    std::shared_ptr<Key> e;
-    std::shared_ptr<Key> f;
-    std::shared_ptr<Key> g;
-    std::shared_ptr<Key> a;
-    std::shared_ptr<Key> b;
+    std::shared_ptr<Keyboard> keys;
+    // sf::RectangleShape t;
+
+    // std::shared_ptr<Key> c;
+    // std::shared_ptr<Key> d;
+    // std::shared_ptr<Key> e;
+    // std::shared_ptr<Key> f;
+    // std::shared_ptr<Key> g;
+    // std::shared_ptr<Key> a;
+    // std::shared_ptr<Key> b;
     
     void initvariables();
     void initWindow();

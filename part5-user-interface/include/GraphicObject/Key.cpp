@@ -2,18 +2,27 @@
 # include <iostream>
 
 // Private functions
-void Key::initvariables(int n)
+void Key::initvariables()
 {
-    this->setSize(sf::Vector2f(27.6,150));
-    this->n = n;
+    int tmp = (this->n-3)%12;
+    if(this->n==2 || tmp == 2 || tmp ==4 || tmp == 7 || tmp == 9 || tmp == 11)
+    {
+        this->setSize(sf::Vector2f(10.0,80));
+    }
+    else
+    {
+        this->setSize(sf::Vector2f(23.9,140));
+    }
 }
 
 // Public
 
 // Constructor & Destructor
 Key::Key(int n)
+    :n(n)
 {   
-    this->initvariables(n);
+    // std::cout << "I am called" << this->n << std::endl;
+    this->initvariables();
 }
 
 Key::~Key()

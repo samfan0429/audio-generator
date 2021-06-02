@@ -19,16 +19,24 @@
 class Keyboard
 {
 private:
-    std::vector<std::shared_ptr<Key>> keys;
-    
+    std::vector<std::shared_ptr<Key>> whites;
+    std::vector<std::shared_ptr<Key>> blacks;
+    sf::RenderWindow* canvas;
+
     void initvariables();
+    void makeCtoB(float x, float y, int oct);
     
 public:
     Keyboard();
 
     virtual ~Keyboard();
 
-    void update();
+    void updatePressed(sf::Vector2f mouse_pos);
+    void draw();
+    void setCanvas(sf::RenderWindow* window);
+
+    std::vector<std::shared_ptr<Key>> getWhites();
+    std::vector<std::shared_ptr<Key>> getBlacks();
 };
  
 #endif

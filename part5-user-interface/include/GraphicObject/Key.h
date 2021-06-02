@@ -19,7 +19,7 @@ class Key: public sf::RectangleShape
 private:
     int n;
     
-    void initvariables(int n);
+    void initvariables();
     
 public:
     Key(int n);
