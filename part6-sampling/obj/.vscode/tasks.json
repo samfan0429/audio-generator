@@ -6,7 +6,7 @@
             "type": "shell",
             "command": "g++",
             "args": [
-                "-c","*.cpp","include/*.cpp", "include/GraphicObject/*.cpp","-I","include"
+               "-c", "../*.cpp","../include/*.cpp", "-I","../include"
             ],
             "problemMatcher": []
         },
@@ -15,7 +15,7 @@
             "type": "shell",
             "command": "g++",
             "args": [
-                "-g","*.o","-o","UI","-lsfml-audio","-lsfml-graphics","-lsfml-window","-lsfml-system", "-lopengl32"
+                "-g","*.o","-o","../bin/UI","-lsfml-audio","-lsfml-graphics","-lsfml-window","-lsfml-system", "-lopengl32"
             ],
             "problemMatcher": [],
             "dependsOn": [
