@@ -27,7 +27,13 @@ Generator& Generator::operator=(const Generator& a)
 // Private sampleups
 
 void Generator::initVariables(double freq, double amp, std::string type, double time, int dots, double rate)
-{
+{  
+    // std::ofstream myfile;
+    // std::cout << "Type the output file name: " << std::endl;
+    // std::string n;
+    // std::cin >> n;
+    // myfile.open ("data/"+n+".tsv");
+//     this->myfile.open ("66.txt");
     // std::cout << "It fucking works wtf" << std::endl;
     double t = 44100.0*4.0/time*60.0/rate;
     if(dots > 0)
@@ -51,6 +57,12 @@ void Generator::initVariables(double freq, double amp, std::string type, double 
         }
     }
 
+    // for(int i=0; i<this->sample.size();i++)
+    // {
+    // // myfile << "WORKS?" << std::endl;
+    //     myfile << i << "\t" << this->sample[i] << std::endl;
+    // }
+    // myfile.close();
     this->buffer.loadFromSamples(&(this->sample[0]), this->sample.size(), 1, 44100);
     this->soundPlayer.setBuffer(this->buffer);
 }
@@ -65,12 +77,12 @@ void Generator::makeSineWave(int time, double freq, double amp)
         double cycles = time / tpc;
         double rad = TWOPI * cycles;
         short amplitude = 32767 * amp;
-        result = amplitude * sin(rad);
+        // result = amplitude * sin(rad);
+        result = amplitude*(pow(sin(rad*TWOPI/4.0),3) + sin(TWOPI/2.0*(rad/2.0+2/3)));
     } else
     {
         result = 0;
     }
-    
     // if(time%1000 == 0)
     // {
     //     std::cout << "It is adding " << time << std::endl;
