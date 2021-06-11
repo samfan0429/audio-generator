@@ -5,7 +5,7 @@
 void Space::initvariables()
 {
     this->keys = std::make_shared<Keyboard>();
-    this->menu = std::make_shared<Menu>();
+    this->mixer = std::make_shared<Mixer>();
     // this->t.setSize(sf::Vector2f(500, 600));
     // this->t.setFillColor(sf::Color::Red);
     // this->t.setOutlineThickness(7);
@@ -24,7 +24,7 @@ void Space::initWindow()
     this->window->setFramerateLimit(30);
 
     this->keys->setCanvas(this->window);
-    this->menu->setCanvas(this->window);
+    this->mixer->setCanvas(this->window);
     // this->window->setVerticalSyncEnabled(true);
 }
 
@@ -69,7 +69,20 @@ void Space::pollEvents()
                     // std::cout << "Mouse Clicked BB" << std::endl;
                     sf::Vector2i mouse_pos = sf::Mouse::getPosition(*(this->window));
                     sf::Vector2f translated_pos = this->window->mapPixelToCoords(mouse_pos);
-                    this->keys->updatePressed(translated_pos);
+                    
+                    if(this->mixer->getGlobalBounds().contains(translated_pos))
+                    {
+                        if(this->mixer->updatePressed(translated_pos))
+                        {
+                            // std::cout << "Roller rolling" << std::endl;
+                            dragged=true;
+                        }
+                    }
+                    else
+                    {
+                        this->keys->updatePressed(translated_pos);
+                    }
+                    
                     // std::cout << mouse_pos.x << "   " << mouse_pos.y << std::endl;
 
                 }
@@ -78,8 +91,18 @@ void Space::pollEvents()
                 if(this->ev.mouseButton.button == sf::Mouse::Left)
                 {
                     // std::cout << "Mouse Released BB" << std::endl;
-                    this->keys->updateReleased();
+                    if(dragged)
+                    {
+                        // std::cout << "Roller released" << std::endl;
+                        dragged=false;
+                    }
+                    else
+                    {
+                        this->keys->updateReleased();
+                    }
                 }
+                break;
+            default:
                 break;
         }
     }
@@ -114,7 +137,7 @@ void Space::render()
 
     // this->window->draw(this->t);
     this->keys->draw();
-    this->menu->draw();
+    this->mixer->draw();
 
     this->window->display();
 }

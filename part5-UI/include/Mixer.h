@@ -1,5 +1,5 @@
-#ifndef MENU_H
-#define MENU_H
+#ifndef MIXER_H
+#define MIXER_H
 
 # include <vector>
 # include <memory>
@@ -12,26 +12,29 @@
 # include <SFML/System.hpp>
 # include <SFML/Window.hpp>
 
-# include "Button.h"
+# include "Roller.h"
 
 // Main Application
-class Menu: public sf::RectangleShape
+class Mixer: public sf::RectangleShape
 {
 private:
-    std::vector<Button> buttons;
+    std::vector<std::shared_ptr<Roller>> rollers;
     sf::RenderWindow* canvas;
+    std::shared_ptr<Roller> dragged;
 
     void initvariables();
     
 public:
-    Menu();
+    Mixer();
 
-    virtual ~Menu();
+    virtual ~Mixer();
 
-    void updatePressed(sf::Vector2f mouse_pos);
+    bool updatePressed(sf::Vector2f mouse_pos);
+    
     void draw();
     void setCanvas(sf::RenderWindow* window);
 
+    std::shared_ptr<Roller> getDragged();
 };
  
 #endif

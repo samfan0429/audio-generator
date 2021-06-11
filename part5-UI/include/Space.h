@@ -15,7 +15,7 @@
 
 // # include "GraphicObject/Key.h"
 # include "Keyboard.h"
-# include "Menu.h"
+# include "Mixer.h"
 
 // Main Application
 class Space
@@ -25,8 +25,10 @@ private:
     sf::VideoMode videomode;
     sf::Event ev;
 
+    bool dragged;
+
     std::shared_ptr<Keyboard> keys;
-    std::shared_ptr<Menu> menu;
+    std::shared_ptr<Mixer> mixer;
     
     void initvariables();
     void initWindow();

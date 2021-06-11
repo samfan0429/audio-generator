@@ -1,5 +1,5 @@
-#ifndef BUTTON_H
-#define BUTTON_H
+#ifndef ROLLER_H
+#define ROLLER_H
 
 # include <vector>
 # include <memory>
@@ -14,17 +14,18 @@
 
 
 // Main Application
-class Button: public sf::RectangleShape
+class Roller: public sf::Sprite
 {
 private:
-    
+    sf::Texture file;
     void initvariables();
     
 public:
-    Button();
+    Roller();
 
-    virtual ~Button();
+    virtual ~Roller();
 
+    void fixCenter(sf::Vector2f pos);
     void update();
 
 };
