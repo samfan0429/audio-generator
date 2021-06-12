@@ -108,9 +108,19 @@ void Space::pollEvents()
     }
 }
 
+void Space::dragEvent()
+{
+    sf::Vector2i mouse_pos = sf::Mouse::getPosition(*(this->window));
+    sf::Vector2f translated_pos = this->window->mapPixelToCoords(mouse_pos);
+    // std::cout << "drag working" << std::endl;
+    this->mixer->updateDragged(translated_pos);
+}
+
 void Space::update()
 {
     // std::cout << "Working" << std::endl;
+    if(dragged) this->dragEvent();
+
     this->pollEvents();
 }
 

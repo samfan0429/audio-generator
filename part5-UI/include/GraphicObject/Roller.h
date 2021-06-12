@@ -4,6 +4,9 @@
 # include <vector>
 # include <memory>
 # include <iostream>
+# include <math.h> 
+
+#define PI 3.14159265
 
 # include <SFML/Graphics.hpp>
 # include <SFML/Audio.hpp>
@@ -18,6 +21,8 @@ class Roller: public sf::Sprite
 {
 private:
     sf::Texture file;
+    sf::Vector2f lastPoint;
+
     void initvariables();
     
 public:
@@ -25,8 +30,10 @@ public:
 
     virtual ~Roller();
 
+
     void fixCenter(sf::Vector2f pos);
-    void update();
+
+    void update(sf::Vector2f mouse_pos);
 
 };
  

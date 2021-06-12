@@ -13,7 +13,7 @@ void Mixer::initvariables()
     int initX = 100, initY = 100;
 
     this->rollers.push_back(std::make_shared<Roller>());
-    this->rollers[0]->fixCenter(sf::Vector2f(50,50));
+    this->rollers[0]->setOrigin(sf::Vector2f(50,50));
     this->rollers[0]->setPosition(sf::Vector2f(initX, initY));
 
 }
@@ -40,11 +40,15 @@ bool Mixer::updatePressed(sf::Vector2f mouse_pos)
         {
             // std::cout << "I got clicked " << std::endl;
             this->dragged = this->rollers[i];
-            this->dragged->update();
             return true;
         }
     }
     return false;
+}
+
+void Mixer::updateDragged(sf::Vector2f mouse_pos)
+{
+    this->dragged->update(mouse_pos);
 }
 
 void Mixer::draw()

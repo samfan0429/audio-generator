@@ -31,6 +31,7 @@ public:
 
     bool updatePressed(sf::Vector2f mouse_pos);
     
+    void updateDragged(sf::Vector2f mouse_pos);
     void draw();
     void setCanvas(sf::RenderWindow* window);
 

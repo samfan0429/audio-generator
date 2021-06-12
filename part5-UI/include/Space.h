@@ -40,6 +40,8 @@ public:
 
     const bool running() const;
 
+    void dragEvent();
+
     void pollEvents();
     void update();
     void render();
