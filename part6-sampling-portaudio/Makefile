@@ -2,7 +2,7 @@ CXX		:= g++
 CXX_FLAGS := -Wall -Wextra -std=c++17 -ggdb
 
 BIN		:= bin
-SRC		:= src/main.cpp src/pa.cpp
+SRC		:= src/simple.cpp src/pa.cpp
 SIMP	:= src/simple.cpp src/pa.cpp
 
 INCLUDE	:= -I include 
@@ -21,7 +21,7 @@ SIMPLE		:= simple
 
 all: $(BIN)/$(EXECUTABLE)
 
-simple: $(BIN)/$(SIMPLE)
+# simple: $(BIN)/$(SIMPLE)
 
 run: clean all
 	clear
@@ -30,14 +30,14 @@ run: clean all
 $(BIN)/$(EXECUTABLE): $(SRC)
 	$(CXX) $(INCLUDE) $(CXX_FLAGS) $(SRC) -o $(BIN)/$(EXECUTABLE) $(PORT)
 
-$(BIN)/$(SIMPLE): $(SIMP)
-	$(CXX) $(INCLUDE) $(CXX_FLAGS) $(SIMP) -o $(BIN)/$(SIMPLE) $(PORT)
+# $(BIN)/$(SIMPLE): $(SIMP)
+# 	$(CXX) $(INCLUDE) $(CXX_FLAGS) $(SIMP) -o $(BIN)/$(SIMPLE) $(PORT)
 
 # $(BIN)/$(SINE): $(SRC)/paex_sine_c++.cpp
 # 	$(CXX) $(CXX_FLAGS) -I$(INCLUDE) -L$(LIB) $(PORT) $^ -o$@
 
-remove-simp:
-	-rm $(BIN)/simple
+# remove-simp:
+# 	-rm $(BIN)/simple
 
 clean:
 	-rm $(BIN)/*
