@@ -21,15 +21,18 @@ class Roller: public sf::Sprite
 {
 private:
     sf::Texture file;
-    sf::Vector2f lastPoint;
+
+    float former, curr, maxVal;
 
     void initvariables();
     
 public:
-    Roller();
+    Roller(float val);
 
     virtual ~Roller();
 
+    void changeFormer();
+    void updateCurr();
 
     void fixCenter(sf::Vector2f pos);
 

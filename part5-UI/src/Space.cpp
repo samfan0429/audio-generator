@@ -95,6 +95,7 @@ void Space::pollEvents()
                     {
                         // std::cout << "Roller released" << std::endl;
                         dragged=false;
+                        this->mixer->updateReleased();
                     }
                     else
                     {
