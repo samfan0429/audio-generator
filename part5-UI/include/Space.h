@@ -16,6 +16,7 @@
 // # include "GraphicObject/Key.h"
 # include "Keyboard.h"
 # include "Mixer.h"
+#include "pa.h"
 
 // Main Application
 class Space

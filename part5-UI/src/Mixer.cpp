@@ -25,6 +25,15 @@ void Mixer::initvariables()
 void Mixer::initFreqRollers(sf::Vector2f* center)
 {
 
+    // sf::Text text;
+
+    // // select the font
+    // text.setFont(font); // font is a sf::Font
+    // text.setString("Hello world");
+    // text.setCharacterSize(24); // in pixels, not points!
+    // text.setFillColor(sf::Color::White);
+    // text.setStyle(sf::Text::Bold);
+
     int x = 100, y = 100;
 
     for(unsigned int i=0;i<rotCount;i++)

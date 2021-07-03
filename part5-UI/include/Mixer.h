@@ -20,6 +20,8 @@ class Mixer: public sf::RectangleShape
 private:
     std::vector<std::shared_ptr<Roller>> freqRollers;
     std::vector<std::shared_ptr<Roller>> ampRollers;
+    // sf::Text freq;
+    // sf::Text amp;
     unsigned int rotCount;
 
     sf::RenderWindow* canvas;
