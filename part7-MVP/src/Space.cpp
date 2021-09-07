@@ -1,14 +1,14 @@
 # include "Space.h"
 
 // Private functions
-void Space::initvariables()
+void Space::initvariables(std::shared_ptr<SM> dat)
 {
     this->dragged = false;
     this->playing = false;
     this->stopped = true;
     this->stopping = false;
     // this->keys = std::make_shared<Keyboard>();
-    this->mixer = std::make_shared<Mixer>();
+    this->mixer = std::make_shared<Mixer>(dat);
     
     this->play = std::make_shared<Button>("Play", sf::Vector2f(100,40), sf::Vector2f(500.0f,450.0f));
     this->stop = std::make_shared<Button>("Stop", sf::Vector2f(100,40), sf::Vector2f(700.0f,450.0f));
@@ -32,9 +32,9 @@ void Space::initWindow()
 }
 
 // Constructor & Destructor
-Space::Space()
+Space::Space(std::shared_ptr<SM> dat)
 {
-    this->initvariables();
+    this->initvariables(dat);
     this->initWindow();
 }
 

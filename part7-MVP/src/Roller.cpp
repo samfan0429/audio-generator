@@ -26,6 +26,14 @@ Roller::Roller(float val)
     this->initvariables();
 }
 
+Roller::Roller(float val, std::shared_ptr<sf::Text> display, unsigned int id)
+{   
+    this->id = id;
+    this->maxVal = val;
+    this->display = display;
+    this->initvariables();
+}
+
 Roller::~Roller()
 {
     // std::cout << "Window deleted" << std::endl;
@@ -45,6 +53,7 @@ void Roller::changeFormer()
 void Roller::updateCurr()
 {
     this->curr = this->getRotation()/360.0*maxVal;
+    this->display->setString(std::to_string(this->curr));
     // std::cout << "Current Value is " << this->curr << std::endl;
 }
 
@@ -63,4 +72,14 @@ void Roller::update(sf::Vector2f mouse_pos)
     // std::cout << this->getRotation() << std::endl;
     this->rotate(ang-this->getRotation());
     // std::cout<< this->getRotation() << std::endl;
+}
+
+int Roller::getID()
+{
+    return this->id;
+}
+
+float Roller::getCurr()
+{
+    return this->curr;
 }

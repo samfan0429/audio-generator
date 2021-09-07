@@ -19,6 +19,7 @@
 # include "Mixer.h"
 # include "pa.h"
 # include "Button.h"
+# include "SM.h"
 
 // Main Application
 class Space
@@ -40,11 +41,11 @@ private:
     std::shared_ptr<Button> stop;
     std::shared_ptr<Mixer> mixer;
     
-    void initvariables();
+    void initvariables(std::shared_ptr<SM> dat);
     void initWindow();
     
 public:
-    Space();
+    Space(std::shared_ptr<SM> dat);
 
     virtual ~Space();
 
