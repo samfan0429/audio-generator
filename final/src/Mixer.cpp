@@ -14,6 +14,9 @@ void Mixer::initvariables()
 
     sf::Vector2f* center = new sf::Vector2f(50.0f,50.0f);
 
+    valDisplays.reserve(rotCount);
+    setFont();
+
     ampRollers.reserve(rotCount);
     initAmpRollers(center);
 
@@ -25,7 +28,16 @@ void Mixer::initAmpRollers(sf::Vector2f* center)
 
     for(unsigned int i=0;i<rotCount;i++)
     {
-        std::shared_ptr<Roller> tmp = std::make_shared<Roller>(1.5f);
+        std::shared_ptr<sf::Text> tmp1 = std::make_shared<sf::Text>();
+        tmp1->setFont(this->font);
+        tmp1->setString("0");
+        tmp1->setCharacterSize(24);
+        tmp1->setFillColor(sf::Color::White);
+        tmp1->setStyle(sf::Text::Bold);
+        tmp1->setPosition(sf::Vector2f(x,y+60));
+        this->valDisplays.push_back(tmp1);
+
+        std::shared_ptr<Roller> tmp = std::make_shared<Roller>(1.5f, tmp1, i);
         tmp->setOrigin(*center);
         tmp->setPosition(sf::Vector2f(x, y));
         this->ampRollers.push_back(tmp);
@@ -33,11 +45,21 @@ void Mixer::initAmpRollers(sf::Vector2f* center)
     }
 }
 
+void Mixer::setFont()
+{
+    
+    if(!this->font.loadFromFile("resource/font/arial.ttf"))
+    {
+        std::cout << "Cannot Find Font in Mixer" << std::endl;
+    }
+}
+
 // Public
 
 // Constructor & Destructor
-Mixer::Mixer()
+Mixer::Mixer(std::shared_ptr<SM> dat)
 {
+    this->dat = dat;
     this->initvariables();
     // this->draw();
 }
@@ -55,7 +77,6 @@ bool Mixer::updatePressed(sf::Vector2f mouse_pos)
         {
             // std::cout << "I got clicked " << std::endl;
             this->dragged = this->ampRollers[i];
-            this->dragged->changeFormer();
             return true;
         }
     }
@@ -65,11 +86,11 @@ bool Mixer::updatePressed(sf::Vector2f mouse_pos)
 void Mixer::updateDragged(sf::Vector2f mouse_pos)
 {
     this->dragged->update(mouse_pos);
+    this->dat->amps[this->dragged->getID()]=this->dragged->getCurr();
 }
 
 void Mixer::updateReleased()
 {
-    this->dragged->updateCurr();
     this->dragged = nullptr;
 }
 
@@ -79,6 +100,7 @@ void Mixer::draw()
     for(unsigned int i=0;i<rotCount;i++)
     {
         this->canvas->draw(*ampRollers[i]);
+        this->canvas->draw(*valDisplays[i]);
     }
 }
 

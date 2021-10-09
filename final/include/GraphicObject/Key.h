@@ -4,6 +4,7 @@
 # include <vector>
 # include <memory>
 # include <iostream>
+# include <math.h>
 
 # include <SFML/Graphics.hpp>
 # include <SFML/Audio.hpp>
@@ -18,9 +19,10 @@ class Key: public sf::RectangleShape
 {
 private:
     int n;
+    float rj;
     
     void initvariables();
-    
+    void rails();
 public:
     Key(int n);
 
@@ -29,6 +31,8 @@ public:
     void update();
 
     int getN();
+
+    float getRJ();  
 };
  
 #endif

@@ -20,24 +20,28 @@
 class Roller: public sf::Sprite
 {
 private:
+    unsigned int id;
     sf::Texture file;
+    std::shared_ptr<sf::Text> display;
 
-    float former, curr, maxVal;
+    float curr, maxVal;
 
     void initvariables();
     
 public:
-    Roller(float val);
+    Roller(float,std::shared_ptr<sf::Text>, unsigned int);
 
     virtual ~Roller();
 
     void changeFormer();
-    void updateCurr();
 
     void fixCenter(sf::Vector2f pos);
 
     void update(sf::Vector2f mouse_pos);
 
+    float getCurr();
+
+    unsigned int getID();
 };
  
 #endif

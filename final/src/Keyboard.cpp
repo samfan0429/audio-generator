@@ -104,8 +104,9 @@ void Keyboard::initvariables()
 // Public
 
 // Constructor & Destructor
-Keyboard::Keyboard()
+Keyboard::Keyboard(std::shared_ptr<SM> dat)
 {
+    this->dat = dat;
     this->initvariables();
 }
 
@@ -114,8 +115,9 @@ Keyboard::~Keyboard()
     // std::cout << "Window deleted" << std::endl;
 }
 
-void Keyboard::updatePressed(sf::Vector2f mouse_pos)
+bool Keyboard::updatePressed(sf::Vector2f mouse_pos)
 {
+    // Look for black keys first.
     for(unsigned int i=0; i< blacks.size();i++)
     {
         if(this->blacks[i]->getGlobalBounds().contains(mouse_pos))
@@ -123,7 +125,8 @@ void Keyboard::updatePressed(sf::Vector2f mouse_pos)
             // std::cout << "I got clicked " << this->blacks[i]->getN() << std::endl;
             this->pressed = this->blacks[i];
             this->pressed->setFillColor(sf::Color::Cyan);
-            return;
+            this->dat->freqs[0] = this->pressed->getRJ();
+            return true;
         }
     }
 
@@ -134,13 +137,16 @@ void Keyboard::updatePressed(sf::Vector2f mouse_pos)
             // std::cout << "I got clicked " << this->whites[i]->getN() << std::endl;
             this->pressed = this->whites[i];
             this->pressed->setFillColor(sf::Color::Cyan);
-            return;
+            this->dat->freqs[0] = this->pressed->getRJ();
+            return true;
         }
     }
+    return false;
 }
 
 void Keyboard::updateReleased()
 {
+    this->dat->freqs[0] = 0;
     if(this->pressed)
     {
         int n = this->pressed->getN();

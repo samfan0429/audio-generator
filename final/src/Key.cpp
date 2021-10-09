@@ -13,6 +13,12 @@ void Key::initvariables()
     {
         this->setSize(sf::Vector2f(23.9,140));
     }
+    this->rails();
+}
+
+void Key::rails()
+{
+    this->rj = pow(2.0,(this->n-49.0)/12.0)*440;
 }
 
 // Public
@@ -38,4 +44,9 @@ void Key::update()
 int Key::getN()
 {
     return this->n;
+}
+
+float Key::getRJ()
+{
+    return rj;
 }

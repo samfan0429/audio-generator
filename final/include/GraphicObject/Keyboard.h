@@ -12,6 +12,7 @@
 # include <SFML/System.hpp>
 # include <SFML/Window.hpp>
 
+# include "SM.h"
 # include "Key.h"
 
 
@@ -24,17 +25,19 @@ private:
     std::shared_ptr<Key> pressed;
     sf::RenderWindow* canvas;
 
+    std::shared_ptr<SM> dat;
+
     int countPlaying;
 
     void initvariables();
     void makeCtoB(float x, float y, int oct);
     
 public:
-    Keyboard();
+    Keyboard(std::shared_ptr<SM>);
 
     virtual ~Keyboard();
 
-    void updatePressed(sf::Vector2f mouse_pos);
+    bool updatePressed(sf::Vector2f mouse_pos);
     void updateReleased();
     void draw();
     void setCanvas(sf::RenderWindow* window);

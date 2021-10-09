@@ -27,7 +27,7 @@ private:
     sf::VideoMode videomode;
     sf::Event ev;
 
-    bool dragged;
+    bool dragged, playing;
 
     std::shared_ptr<Keyboard> keys;
     std::shared_ptr<Mixer> mixer;
@@ -47,6 +47,8 @@ public:
     void pollEvents();
     void update();
     void render();
+
+    bool getPlaying();
 };
  
 #endif

@@ -4,8 +4,10 @@
 // Private functions
 void Space::initvariables(std::shared_ptr<SM> dat)
 {
-    this->keys = std::make_shared<Keyboard>();
-    this->mixer = std::make_shared<Mixer>();
+    this->keys = std::make_shared<Keyboard>(dat);
+    this->mixer = std::make_shared<Mixer>(dat);
+    this->dragged = false;
+    this->playing = false;
     // this->t.setSize(sf::Vector2f(500, 600));
     // this->t.setFillColor(sf::Color::Red);
     // this->t.setOutlineThickness(7);
@@ -80,7 +82,7 @@ void Space::pollEvents()
                     }
                     else
                     {
-                        this->keys->updatePressed(translated_pos);
+                        this->playing = this->keys->updatePressed(translated_pos);
                     }
                     
                     // std::cout << mouse_pos.x << "   " << mouse_pos.y << std::endl;
@@ -97,8 +99,9 @@ void Space::pollEvents()
                         dragged=false;
                         this->mixer->updateReleased();
                     }
-                    else
+                    else if(playing)
                     {
+                        playing = false;
                         this->keys->updateReleased();
                     }
                 }
@@ -151,4 +154,9 @@ void Space::render()
     this->mixer->draw();
 
     this->window->display();
+}
+
+bool Space::getPlaying()
+{
+    return playing;
 }

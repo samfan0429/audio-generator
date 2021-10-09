@@ -12,6 +12,7 @@
 # include <SFML/System.hpp>
 # include <SFML/Window.hpp>
 
+# include "SM.h"
 # include "Roller.h"
 
 // Main Application
@@ -19,8 +20,12 @@ class Mixer: public sf::RectangleShape
 {
 private:
     std::vector<std::shared_ptr<Roller>> ampRollers;
+    std::vector<std::shared_ptr<sf::Text>> valDisplays;
     // sf::Text freq;
     // sf::Text amp;
+
+    std::shared_ptr<SM> dat;
+
     unsigned int rotCount;
 
     sf::Font font;
@@ -29,10 +34,11 @@ private:
     std::shared_ptr<Roller> dragged;
 
     void initvariables();
+    void setFont();
     void initAmpRollers(sf::Vector2f* center);
     
 public:
-    Mixer();
+    Mixer(std::shared_ptr<SM>);
 
     virtual ~Mixer();
 
