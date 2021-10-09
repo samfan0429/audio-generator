@@ -6,6 +6,7 @@ Pa::miniCallBack Pa::miniCb;
 
 // full callback, userdata
 Pa::Pa(mainCallBack func, void* data){    
+    // std::cout << "Working? " << std::endl;
     PaCallBack = func;
     userDataType = data;
     intialize();

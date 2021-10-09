@@ -1,6 +1,6 @@
 #include "pa.h"
 #include <math.h>
-
+#include <iostream>
 const float tau = 6.2831853;
 const float sample_rate = 44100;
 
@@ -61,6 +61,6 @@ int main(){
     
     Pa a(minifunc, &data);
     a.start(Pa::waitForKey);
-    
+    std::cout << "Working? " << std::endl;
     return 0;
 }
