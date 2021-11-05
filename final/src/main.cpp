@@ -12,10 +12,11 @@
 # include "Space.h"
 # include "pa.h"
 # include "SM.h"
+# include <math.h>
 
 #define TWO_PI 6.2831853
 
-double phase = 0, step = TWO_PI/44100.00;
+float phase=0, step = TWO_PI/44100.00;
 
 // step = TWO_PI*440/44100.0;
 
@@ -24,21 +25,15 @@ void paFunc(const float* in, float* out, long frames, void* data){
     SM* tmp = reinterpret_cast<SM*>(data);
     for(int i = 0; i < frames; i++ ){
             phase += step;
-            *out++ = 2*sin(tmp->freqs[0]*phase)+\
-            2*tmp->amps[0]*sin(tmp->freqs[0]*2*phase)+\
-            2*tmp->amps[1]*sin(tmp->freqs[0]*3*phase)+\
-            2*tmp->amps[2]*sin(tmp->freqs[0]*4*phase)+\
-            2*tmp->amps[3]*sin(tmp->freqs[0]*5*phase)+\
-            2*tmp->amps[4]*sin(tmp->freqs[0]*6*phase)+\
-            2*tmp->amps[5]*sin(tmp->freqs[0]*7*phase)+\
-            2*tmp->amps[6]*sin(tmp->freqs[0]*8*phase);
-        }
+            
+            *out++ = tmp->getOutput(phase);
+    }
 }
 
 int main()
 {
     // create the window
-    bool play = false, stop = false;
+    bool play = false, playing = false;
     std::shared_ptr<SM> dat = std::make_shared<SM>();
     Pa player(paFunc, dat);
     std::unique_ptr<Space> window = std::make_unique<Space>(dat);
@@ -49,16 +44,17 @@ int main()
         window->update(); 
 
         play = window->getPlaying();
-        // stop = window->getStopped();
     
-        if(play)
+        if(play^playing)
         {
             // std::cout << "playing" << std::endl;
+            playing = true;
             player.start();
         }
-        else
+        else if(!(play&playing))
         {
             // std::cout << "stopped" << std::endl;
+            playing = false;
             player.stop();
         }
 

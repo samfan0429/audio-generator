@@ -1,0 +1,5 @@
+            // 2*tmp->amps[2]*sin(tmp->freqs[0]*4*phase)+\
+            // 2*tmp->amps[3]*sin(tmp->freqs[0]*5*phase)+\
+            // 2*tmp->amps[4]*sin(tmp->freqs[0]*6*phase)+\
+            // 2*tmp->amps[5]*sin(tmp->freqs[0]*7*phase)+\
+            // 2*tmp->amps[6]*sin(tmp->freqs[0]*8*phase);

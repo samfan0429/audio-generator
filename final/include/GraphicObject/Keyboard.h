@@ -22,14 +22,15 @@ class Keyboard
 private:
     std::vector<std::shared_ptr<Key>> whites;
     std::vector<std::shared_ptr<Key>> blacks;
-    std::shared_ptr<Key> pressed;
     sf::RenderWindow* canvas;
 
     std::shared_ptr<SM> dat;
+    bool playing[88];
 
-    int countPlaying;
+    int countPlaying = 0;
 
     void initvariables();
+
     void makeCtoB(float x, float y, int oct);
     
 public:
@@ -37,13 +38,15 @@ public:
 
     virtual ~Keyboard();
 
-    bool updatePressed(sf::Vector2f mouse_pos);
-    void updateReleased();
+    void updatePressed(sf::Vector2f mouse_pos);
     void draw();
     void setCanvas(sf::RenderWindow* window);
 
     std::vector<std::shared_ptr<Key>> getWhites();
     std::vector<std::shared_ptr<Key>> getBlacks();
+
+    bool getPlaying();
+
 };
  
 #endif

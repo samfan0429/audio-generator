@@ -19,10 +19,8 @@ class Key: public sf::RectangleShape
 {
 private:
     int n;
-    float rj;
     
     void initvariables();
-    void rails();
 public:
     Key(int n);
 

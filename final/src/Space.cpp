@@ -82,7 +82,8 @@ void Space::pollEvents()
                     }
                     else
                     {
-                        this->playing = this->keys->updatePressed(translated_pos);
+                        this->keys->updatePressed(translated_pos);
+                        this->playing = this->keys->getPlaying();
                     }
                     
                     // std::cout << mouse_pos.x << "   " << mouse_pos.y << std::endl;
@@ -98,11 +99,6 @@ void Space::pollEvents()
                         // std::cout << "Roller released" << std::endl;
                         dragged=false;
                         this->mixer->updateReleased();
-                    }
-                    else if(playing)
-                    {
-                        playing = false;
-                        this->keys->updateReleased();
                     }
                 }
                 break;

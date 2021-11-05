@@ -59,6 +59,11 @@ void Keyboard::makeCtoB(float xi, float yi, int oct)
 
 void Keyboard::initvariables()
 {
+    for(int i=0; i<88; i++)
+    {
+        this->playing[i]=0;
+    }
+    
     countPlaying = 0;
     
     this->whites.reserve(52);
@@ -115,7 +120,7 @@ Keyboard::~Keyboard()
     // std::cout << "Window deleted" << std::endl;
 }
 
-bool Keyboard::updatePressed(sf::Vector2f mouse_pos)
+void Keyboard::updatePressed(sf::Vector2f mouse_pos)
 {
     // Look for black keys first.
     for(unsigned int i=0; i< blacks.size();i++)
@@ -123,10 +128,21 @@ bool Keyboard::updatePressed(sf::Vector2f mouse_pos)
         if(this->blacks[i]->getGlobalBounds().contains(mouse_pos))
         {
             // std::cout << "I got clicked " << this->blacks[i]->getN() << std::endl;
-            this->pressed = this->blacks[i];
-            this->pressed->setFillColor(sf::Color::Cyan);
-            this->dat->freqs[0] = this->pressed->getRJ();
-            return true;
+            
+            this->dat->update(this->blacks[i]->getN());
+
+            if(this->playing[this->blacks[i]->getN()-1])
+            {
+                this->blacks[i]->setFillColor(sf::Color::Black);
+                this->playing[this->blacks[i]->getN()-1]=false;
+                this->countPlaying--;
+            } else
+            {
+                this->blacks[i]->setFillColor(sf::Color::Cyan);
+                this->playing[this->blacks[i]->getN()-1]=true;
+                this->countPlaying++;
+            }
+            return;
         }
     }
 
@@ -135,31 +151,21 @@ bool Keyboard::updatePressed(sf::Vector2f mouse_pos)
         if(this->whites[i]->getGlobalBounds().contains(mouse_pos))
         {
             // std::cout << "I got clicked " << this->whites[i]->getN() << std::endl;
-            this->pressed = this->whites[i];
-            this->pressed->setFillColor(sf::Color::Cyan);
-            this->dat->freqs[0] = this->pressed->getRJ();
-            return true;
-        }
-    }
-    return false;
-}
+            this->dat->update(this->whites[i]->getN());
 
-void Keyboard::updateReleased()
-{
-    this->dat->freqs[0] = 0;
-    if(this->pressed)
-    {
-        int n = this->pressed->getN();
-        int tmp = (n-3)%12;
-        if(n==2 || tmp == 2 || tmp ==4 || tmp == 7 || tmp == 9 || tmp == 11)
-        {
-            this->pressed->setFillColor(sf::Color::Black);
+            if(this->playing[this->whites[i]->getN()-1])
+            {
+                this->whites[i]->setFillColor(sf::Color::White);
+                this->playing[this->whites[i]->getN()-1]=false;
+                this->countPlaying--;
+            } else
+            {
+                this->whites[i]->setFillColor(sf::Color::Cyan);
+                this->playing[this->whites[i]->getN()-1]=true;
+                this->countPlaying++;
+            }
+            return;
         }
-        else
-        {
-            this->pressed->setFillColor(sf::Color::White);
-        }
-        this->pressed = NULL;
     }
     return;
 }
@@ -193,4 +199,11 @@ std::vector<std::shared_ptr<Key>> Keyboard::getWhites()
 std::vector<std::shared_ptr<Key>> Keyboard::getBlacks()
 {
     return this->blacks;
+}
+
+bool Keyboard::getPlaying()
+{
+    if(countPlaying == 0) return false;
+
+    return this->countPlaying;
 }
