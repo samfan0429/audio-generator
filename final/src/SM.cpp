@@ -31,8 +31,15 @@ SM::SM()
 
 void SM::update(int n)
 {
-    if(pressed[n-1])pressed[n-1]= 0;
-    else pressed[n-1]=1;
+    if(pressed[n-1])
+    {
+        pressed[n-1]= 0;
+        count--;
+    } else
+    {
+        pressed[n-1]=1;
+        count++;
+    }
 }
 
 bool SM::isPlaying(int n)
@@ -52,7 +59,7 @@ float SM::getOutput(float phase)
             +0.25*sin(rbs[i]*4*phase);
         }
     }
-    return 0.2*output;
+    return 0.4*output/(float)count;
 
 }
 

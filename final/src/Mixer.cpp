@@ -1,5 +1,4 @@
 # include "Mixer.h"
-# include <iostream>
 
 // Private functions
 void Mixer::initvariables()

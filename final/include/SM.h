@@ -9,14 +9,16 @@ class SM
 private:
     float rbs[88];
     void initRb();
+    int count=0;
+    
+    bool pressed[88];
 
 public:
     SM();
 
     unsigned int playCount = 0;
     float amps[7];
-    bool pressed[88];
-
+    
     void update(int n);
 
     bool isPlaying(int n);
