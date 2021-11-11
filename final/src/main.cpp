@@ -45,7 +45,7 @@ int main()
 
         play = window->getPlaying();
     
-        if(play^playing)
+        if(play&!playing)
         {
             // std::cout << "playing" << std::endl;
             playing = true;
