@@ -23,32 +23,32 @@
 class Space
 {
 private:
-    sf::RenderWindow* window;
-    sf::VideoMode videomode;
-    sf::Event ev;
+	sf::RenderWindow* window;
+	sf::VideoMode videomode;
+	sf::Event ev;
 
-    bool dragged, playing;
+	bool dragged, playing;
 
-    std::shared_ptr<Keyboard> keys;
-    std::shared_ptr<Mixer> mixer;
-    
-    void initvariables(std::shared_ptr<SM>);
-    void initWindow();
-    
+	std::shared_ptr<Keyboard> keys;
+	std::shared_ptr<Mixer> mixer;
+
+	void initvariables(SM*);
+	void initWindow();
+
 public:
-    Space(std::shared_ptr<SM>);
+	Space(SM*);
 
-    virtual ~Space();
+	virtual ~Space();
 
-    const bool running() const;
+	const bool running() const;
 
-    void dragEvent();
+	void dragEvent();
 
-    void pollEvents();
-    void update();
-    void render();
+	void pollEvents();
+	void update();
+	void render();
 
-    bool getPlaying();
+	bool getPlaying();
 };
- 
+
 #endif

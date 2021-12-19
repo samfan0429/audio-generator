@@ -15,22 +15,22 @@
 
 
 // Main Application
-class Key: public sf::RectangleShape
+class Key : public sf::RectangleShape
 {
 private:
-    int n;
-    
-    void initvariables();
+	int n;
+
+	void initvariables();
 public:
-    Key(int n);
+	Key(int n);
 
-    virtual ~Key();
+	virtual ~Key();
 
-    void update();
+	void update();
 
-    int getN();
+	int getN();
 
-    float getRJ();  
+	float getRJ();
 };
- 
+
 #endif

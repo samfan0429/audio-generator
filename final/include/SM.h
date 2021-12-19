@@ -7,24 +7,24 @@
 class SM
 {
 private:
-    float rbs[88];
-    void initRb();
-    int count=0;
-    
-    bool pressed[88];
+	float rbs[88];
+	void initRb();
+
+	int count = 0;
+	bool pressed[88];
 
 public:
-    SM();
+	SM();
 
-    unsigned int playCount = 0;
-    float amps[7];
-    
-    void update(int n);
+	unsigned int playCount = 0;
+	float amps[7];
 
-    bool isPlaying(int n);
+	void update(int n);
 
-    float getOutput(float phase);
-    float getRbAt(int n);
+	bool isPlaying(int n);
+
+	float getOutput(float phase);
+	float getRbAt(int n);
 
 };
 

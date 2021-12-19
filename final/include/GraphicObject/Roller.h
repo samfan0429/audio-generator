@@ -17,31 +17,31 @@
 
 
 // Main Application
-class Roller: public sf::Sprite
+class Roller : public sf::Sprite
 {
 private:
-    unsigned int id;
-    sf::Texture file;
-    std::shared_ptr<sf::Text> display;
+	unsigned int id;
+	sf::Texture file;
+	std::shared_ptr<sf::Text> display;
 
-    float curr, maxVal;
+	float curr, maxVal;
 
-    void initvariables();
-    
+	void initvariables();
+
 public:
-    Roller(float,std::shared_ptr<sf::Text>, unsigned int);
+	Roller(float, std::shared_ptr<sf::Text>, unsigned int);
 
-    virtual ~Roller();
+	virtual ~Roller();
 
-    void changeFormer();
+	void changeFormer();
 
-    void fixCenter(sf::Vector2f pos);
+	void fixCenter(sf::Vector2f pos);
 
-    void update(sf::Vector2f mouse_pos);
+	void update(sf::Vector2f mouse_pos);
 
-    float getCurr();
+	float getCurr();
 
-    unsigned int getID();
+	unsigned int getID();
 };
- 
+
 #endif

@@ -16,41 +16,41 @@
 # include "Roller.h"
 
 // Main Application
-class Mixer: public sf::RectangleShape
+class Mixer : public sf::RectangleShape
 {
 private:
-    std::vector<std::shared_ptr<Roller>> ampRollers;
-    std::vector<std::shared_ptr<sf::Text>> valDisplays;
-    // sf::Text freq;
-    // sf::Text amp;
+	std::vector<std::shared_ptr<Roller>> ampRollers;
+	std::vector<std::shared_ptr<sf::Text>> valDisplays;
+	// sf::Text freq;
+	// sf::Text amp;
 
-    std::shared_ptr<SM> dat;
+	std::shared_ptr<SM> dat;
 
-    unsigned int rotCount;
+	unsigned int rotCount;
 
-    sf::Font font;
+	sf::Font font;
 
-    sf::RenderWindow* canvas;
-    std::shared_ptr<Roller> dragged;
+	sf::RenderWindow* canvas;
+	std::shared_ptr<Roller> dragged;
 
-    void initvariables();
-    void setFont();
-    void initAmpRollers(sf::Vector2f* center);
-    
+	void initvariables();
+	void setFont();
+	void initAmpRollers(sf::Vector2f* center);
+
 public:
-    Mixer(std::shared_ptr<SM>);
+	Mixer(std::shared_ptr<SM>);
 
-    virtual ~Mixer();
+	virtual ~Mixer();
 
-    bool updatePressed(sf::Vector2f mouse_pos);
-    
-    void updateDragged(sf::Vector2f mouse_pos);
-    void updateReleased();
+	bool updatePressed(sf::Vector2f mouse_pos);
 
-    void draw();
-    void setCanvas(sf::RenderWindow* window);
+	void updateDragged(sf::Vector2f mouse_pos);
+	void updateReleased();
 
-    std::shared_ptr<Roller> getDragged();
+	void draw();
+	void setCanvas(sf::RenderWindow* window);
+
+	std::shared_ptr<Roller> getDragged();
 };
- 
+
 #endif
