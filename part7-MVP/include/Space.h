@@ -5,60 +5,50 @@
 # include <memory>
 # include <iostream>
 # include <thread>
-# include <string>
 
 # include <SFML/Graphics.hpp>
-// # include <SFML/Audio.hpp>
+# include <SFML/Audio.hpp>
 # include <SFML/Network.hpp>
 # include <SFML/Window.hpp>
 # include <SFML/System.hpp>
 # include <SFML/Window.hpp>
 
 // # include "GraphicObject/Key.h"
-// # include "Keyboard.h"
+# include "Keyboard.h"
 # include "Mixer.h"
 # include "pa.h"
-# include "Button.h"
 # include "SM.h"
 
 // Main Application
 class Space
 {
 private:
-    sf::RenderWindow* window;
-    sf::VideoMode videomode;
-    sf::Event ev;
+	sf::RenderWindow* window;
+	sf::VideoMode videomode;
+	sf::Event ev;
 
-    bool dragged;
-    bool stopping;
-    bool playing;
-    bool stopped;
+	bool dragged, playing;
 
-    // std::shared_ptr<Keyboard> keys;
-    // std::shared_ptr<Pa> soundPlayer;
+	std::shared_ptr<Keyboard> keys;
+	std::shared_ptr<Mixer> mixer;
 
-    std::shared_ptr<Button> play;
-    std::shared_ptr<Button> stop;
-    std::shared_ptr<Mixer> mixer;
-    
-    void initvariables(std::shared_ptr<SM> dat);
-    void initWindow();
-    
+	void initvariables(SM*);
+	void initWindow();
+
 public:
-    Space(std::shared_ptr<SM> dat);
+	Space(SM*);
 
-    virtual ~Space();
+	virtual ~Space();
 
-    const bool running() const;
+	const bool running() const;
 
-    void dragEvent();
+	void dragEvent();
 
-    void pollEvents();
-    void update();
-    void render();
+	void pollEvents();
+	void update();
+	void render();
 
-    bool getPlaying();
-    bool getStopped();
+	bool getPlaying();
 };
- 
+
 #endif
